@@ -14,7 +14,7 @@ export const zMovie = () =>
     membreStaffs: z.array(zStaff()).nullable(),
     description: z.string(),
     categories: z.array(zCategory()).nullable(),
-    duration: z.string(),
+    duration: z.number(),
   });
 export type staff = z.infer<ReturnType<typeof zStaff>>;
 

@@ -8,6 +8,7 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 import { Page, PageContent } from '@/components/Page';
 import { Loader } from '@/layout/Loader';
@@ -16,7 +17,7 @@ import { useMovieList } from './service';
 
 const PageMovies = () => {
   const { movies, isLoadingPage } = useMovieList();
-
+  const navigate = useNavigate();
   return (
     <Page containerSize="xl">
       <PageContent>
@@ -25,7 +26,12 @@ const PageMovies = () => {
           <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 5 }} spacing={4}>
             {!isLoadingPage &&
               movies?.map((item) => (
-                <Stack key={item.id}>
+                <Stack
+                  key={item.id}
+                  onClick={() => {
+                    navigate(`${item.id}`);
+                  }}
+                >
                   <Image
                     src={
                       'https://catimage.net/images/2023/07/07/The-Out-Laws-2023-Hindi-Dubbed-HDRip-Full-Movie-HDHub4u.jpg'
