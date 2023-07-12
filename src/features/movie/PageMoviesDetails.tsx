@@ -33,7 +33,7 @@ const PageMoviesDetails = () => {
               src={
                 'https://catimage.net/images/2023/07/07/The-Out-Laws-2023-Hindi-Dubbed-HDRip-Full-Movie-HDHub4u.jpg'
               }
-              alt={data.name}
+              alt={'data.name'}
               borderRadius={'8px'}
             />
             <Stack>

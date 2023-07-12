@@ -39,7 +39,12 @@ const PageMovieDetails = dynamic(
     loading: () => <Loader />,
   }
 );
-
+const PageMoviesCreate = dynamic(
+  () => import('@/features/movie/PageMovieCreate'),
+  {
+    loading: () => <Loader />,
+  }
+);
 const PageUserCreate = dynamic(
   () => import('@/features/users/PageUserCreate'),
   {
@@ -132,6 +137,10 @@ export const routes = [
               {
                 path: '',
                 element: <PageMovies />,
+              },
+              {
+                path: 'create',
+                element: <PageMoviesCreate />,
               },
               {
                 path: ':id',

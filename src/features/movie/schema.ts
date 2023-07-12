@@ -7,14 +7,14 @@ export type movies = z.infer<ReturnType<typeof zMovie>>;
 export const zMovie = () =>
   z.object({
     id: z.number(),
-    name: z.string(),
-    language: zlanguage(),
+    name: z.string().nullish(),
+    language: zlanguage().nullish(),
     imageUrl: z.string().nullish(),
     publishDate: z.string().nullish(),
     membreStaffs: z.array(zStaff()).nullable(),
-    description: z.string(),
+    description: z.string().nullish(),
     categories: z.array(zCategory()).nullable(),
-    duration: z.number(),
+    duration: z.number().nullish(),
   });
 export type staff = z.infer<ReturnType<typeof zStaff>>;
 
