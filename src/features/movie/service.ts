@@ -18,14 +18,24 @@ const MOVIES_EXTEND_URL = '/movie-extended';
 
 const moviesKeys = createQueryKeys('moviesService', {
   movie: (params: { id?: string }) => [params],
+  movies: (params: { search?: string }) => [params],
 });
 type MoviesKeys = inferQueryKeys<typeof moviesKeys>;
 
-export const useMovieList = (queryOptions: UseQueryOptions<MovieList> = {}) => {
+export const useMovieList = (
+  { search = '' } = {},
+  queryOptions: UseQueryOptions<
+    MovieList,
+    MoviesKeys['movies']['queryKey']
+  > = {}
+) => {
+  console.log(search);
   const query = useQuery({
     queryFn: async () => {
-      const response = await Axios.get(MOVIES_BASE_URL);
-      console.log(response);
+      const response = await Axios.get(MOVIES_EXTEND_URL, {
+        params: { search },
+      });
+      console.log(response, 'loula');
       return zMovieList().parse({
         movies: response.data,
       });

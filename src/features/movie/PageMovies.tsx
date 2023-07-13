@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Badge,
@@ -8,18 +8,29 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { Page, PageContent } from '@/components/Page';
+import { SearchInput } from '@/components/SearchInput';
 import { Loader } from '@/layout/Loader';
 
 import { useMovieList } from './service';
 
 const PageMovies = () => {
-  const { movies, isLoadingPage } = useMovieList();
+  const [searchParams, setSearchParams] = useSearchParams('');
+
+  const { movies, isLoadingPage } = useMovieList({
+    search: searchParams.get('search') ?? '',
+  });
   const navigate = useNavigate();
   return (
     <Page containerSize="xl">
+      <SearchInput
+        onChange={(searchValue) => {
+          setSearchParams({ search: searchValue ?? '' });
+        }}
+        value={searchParams.get('search') ?? ''}
+      />
       <PageContent>
         {isLoadingPage && <Loader />}
         <Stack>
@@ -36,7 +47,7 @@ const PageMovies = () => {
                     src={
                       'https://catimage.net/images/2023/07/07/The-Out-Laws-2023-Hindi-Dubbed-HDRip-Full-Movie-HDHub4u.jpg'
                     }
-                    alt={item.name}
+                    alt={'item.name'}
                     borderRadius={'8px'}
                   />
                   <Text
