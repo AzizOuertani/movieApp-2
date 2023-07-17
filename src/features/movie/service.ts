@@ -26,12 +26,14 @@ export const useMovieList = (
   { search = '' } = {},
   queryOptions: UseQueryOptions<
     MovieList,
+    AxiosError<ApiErrorResponse>,
+    MovieList,
     MoviesKeys['movies']['queryKey']
   > = {}
 ) => {
-  console.log(search);
-  const query = useQuery({
+  const query = useQuery(moviesKeys.movies({ search: search }).queryKey, {
     queryFn: async () => {
+      console.log(search, 'hethy search ');
       const response = await Axios.get(MOVIES_EXTEND_URL, {
         params: { search },
       });

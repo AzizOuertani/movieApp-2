@@ -8,16 +8,18 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { LuPlus } from 'react-icons/lu';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { Page, PageContent } from '@/components/Page';
+import { ResponsiveIconButton } from '@/components/ResponsiveIconButton';
 import { SearchInput } from '@/components/SearchInput';
 import { Loader } from '@/layout/Loader';
 
 import { useMovieList } from './service';
 
 const PageMovies = () => {
-  const [searchParams, setSearchParams] = useSearchParams('');
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const { movies, isLoadingPage } = useMovieList({
     search: searchParams.get('search') ?? '',
@@ -25,12 +27,22 @@ const PageMovies = () => {
   const navigate = useNavigate();
   return (
     <Page containerSize="xl">
-      <SearchInput
-        onChange={(searchValue) => {
-          setSearchParams({ search: searchValue ?? '' });
-        }}
-        value={searchParams.get('search') ?? ''}
-      />
+      <HStack spacing={4}>
+        <SearchInput
+          onChange={(searchValue) => {
+            setSearchParams({ search: searchValue ?? '' });
+          }}
+          value={searchParams.get('search') ?? ''}
+        />
+        <ResponsiveIconButton
+          as={Link}
+          to="/movie/create"
+          variant="@primary"
+          icon={<LuPlus />}
+        >
+          Add New Movie
+        </ResponsiveIconButton>
+      </HStack>
       <PageContent>
         {isLoadingPage && <Loader />}
         <Stack>

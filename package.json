@@ -31,6 +31,7 @@
     "*.{ts,tsx,js,jsx,json}": "prettier --write"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/next-js": "2.1.4",
     "@chakra-ui/react": "2.7.0",
     "@chakra-ui/theme-tools": "2.0.18",
@@ -65,6 +66,7 @@
     "react-use-measure": "2.1.1",
     "sharp": "0.32.1",
     "swagger-ui-react": "4.19.0",
+    "uuid": "^9.0.0",
     "zod": "3.21.4",
     "zustand": "4.3.8"
   },

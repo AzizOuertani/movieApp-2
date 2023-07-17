@@ -23,7 +23,7 @@ export const zStaff = () =>
     id: z.number(),
     firstName: z.string().nullish(),
     lastName: z.string().nullish(),
-    role: z.array(zRole().nullish()),
+    role: zRole().nullish(),
   });
 export type category = z.infer<ReturnType<typeof zCategory>>;
 
@@ -32,7 +32,6 @@ export const zCategory = () =>
     id: z.number(),
     name: z.string().nullish(),
     description: z.string().nullish(),
-    role: z.array(zRole().nullish()),
   });
 export type MovieList = z.infer<ReturnType<typeof zMovieList>>;
 export const zMovieList = () =>
